@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "ViewControllerSecond.h"
 
 @interface ViewController ()
 
@@ -17,7 +18,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
 }
 
 - (BOOL)shouldAutorotate {
@@ -25,17 +31,27 @@
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
+    NSLog(@"supported called in blue");
     return UIInterfaceOrientationMaskLandscape;
 }
 
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
-    return UIInterfaceOrientationLandscapeLeft | UIInterfaceOrientationLandscapeRight ;
+    NSLog(@"preferred called in blue");
+    return UIInterfaceOrientationLandscapeLeft;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)digInto:(id)sender {
+    ViewControllerSecond * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewControllerSecond"];
+    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    [self presentViewController:nav animated:YES completion:^{
+        
+    }];
 }
 
 - (IBAction)presentAlert:(id)sender {

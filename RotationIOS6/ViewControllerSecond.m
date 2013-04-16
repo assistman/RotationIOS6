@@ -9,10 +9,6 @@
 #import "ViewControllerSecond.h"
 #import "MovieViewController.h"
 
-@interface UIDevice (MyPrivateNameThatAppleWouldNeverUseGoesHere)
-- (void) setOrientation:(UIInterfaceOrientation)orientation;
-@end
-
 @interface ViewControllerSecond ()
 
 @end
@@ -28,10 +24,16 @@
     return self;
 }
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [[UIDevice currentDevice] setOrientation:UIInterfaceOrientationLandscapeRight];
+    UIBarButtonItem * item =  [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneclick:)];
+    [self.navigationItem setRightBarButtonItem:item];
+    //[[UIDevice currentDevice] setOrientation:UIInterfaceOrientationPortrait];
 //    UIDeviceOrientation devOrient = [UIDevice currentDevice].orientation;
 //    if (devOrient != UIInterfaceOrientationPortrait) {
 //        [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait];
@@ -41,11 +43,18 @@
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(rotateView) name:UIDeviceOrientationDidChangeNotification object:nil];
 }
 
+- (void)doneclick:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
+
 - (BOOL)shouldAutorotate {
     return YES;
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
+    NSLog(@"supported called in red");
     return UIInterfaceOrientationMaskPortrait;
 }
 
@@ -54,6 +63,7 @@
 }
 
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    NSLog(@"preferred called in red");
     return UIInterfaceOrientationPortrait;
 }
 

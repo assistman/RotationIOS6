@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ViewController : UIViewController <UIAlertViewDelegate>
+- (IBAction)digInto:(id)sender;
 
 - (IBAction)presentAlert:(id)sender;
 @end
